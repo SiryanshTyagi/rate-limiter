@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
 import express from "express";
 import { rateLimiter } from "./middleware/rateLimiter.js";
 import redisClient from "./service/redis.js";
