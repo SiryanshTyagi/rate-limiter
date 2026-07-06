@@ -16,8 +16,8 @@ const luaScript = fs.readFileSync(
 let luaScriptSha = null;
 
 // Token bucket settings shared by the JS fallback path and Lua path.
-const BUCKET_SIZE = 20; // Maximum number of tokens in the bucket
-const REFILL_RATE = 1; // tokens per second
+const BUCKET_SIZE = parseInt(process.env.BUCKET_SIZE) || 10; // parseInt to ensure it's a number
+const REFILL_RATE = parseInt(process.env.BUCKET_REFILL_RATE) || 1; // tokens per second
 
 // Small utility: safely convert Redis string values into numbers.
 function toNumber(value, fallback) {
