@@ -99,6 +99,12 @@ async function loadLuaScript() {
   luaScriptSha = await redisClient.scriptLoad(luaScript);
 }
 
+async function ensureLuaScriptLoaded() {
+  if (!luaScriptSha) {
+    await loadLuaScript();
+  }
+}
+
 async function executeLua(userId) {
   return redisClient.evalSha(luaScriptSha, {
     keys: [`bucket:${userId}`],
@@ -106,11 +112,9 @@ async function executeLua(userId) {
   });
 }
 
-// Preload the Lua script at startup so the first request can use evalSha.
-await loadLuaScript();
-
 export async function allowRequestLua(userId) {
   try {
+    await ensureLuaScriptLoaded();
     const allowed = await executeLua(userId);
     return allowed === 1;
   } catch (error) {

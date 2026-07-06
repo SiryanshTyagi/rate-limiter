@@ -1,9 +1,16 @@
 import { allowRequest } from "../service/tokenBucket.js";
 import { allowRequestRedis } from "../service/tokenBucketRedis.js";
 import { allowRequestLua } from "../service/tokenBucketRedis.js";
+import {
+  incrementAllowed,
+  incrementBlocked,
+  incrementTotal,
+} from "../service/metrics.js";
 
 // Pick the limiter implementation you want to use here.
 export async function rateLimiter(req, res, next) {
+  incrementTotal();
+
   // Use a stable user key; fallback to IP when no custom header is sent.
   const userId = req.headers["x-user-id"] || req.ip; // Use the IP address as the user identifier
 
@@ -11,10 +18,13 @@ export async function rateLimiter(req, res, next) {
   const allowed = await allowRequestLua(userId);
 
   if (!allowed) {
+    incrementBlocked();
     return res.status(429).json({
       success: false,
       message: "Too many requests, please try again later.",
     });
   }
+
+  incrementAllowed();
   next();
 }
