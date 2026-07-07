@@ -1,30 +1,46 @@
+/* ---------- Layout ---------- */
+
 .app {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px;
+  max-width: 1250px;
+  margin: 32px auto;
+  padding: 0 20px 40px;
 }
+
+body {
+  background: #f6f8fa;
+  color: #24292f;
+}
+
+/* ---------- Common Card ---------- */
+
+.navbar,
+.metric-card,
+.token-card,
+.test-panel,
+.recent-requests {
+  background: #fff;
+  border: 1px solid #d8dee4;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+/* ---------- Navbar ---------- */
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  padding: 16px 24px;
-
-  background: #ffffff;
-  border: 1px solid #d0d7de;
-  border-radius: 6px;
 }
 
 .navbar-title h1 {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .navbar-title p {
-  margin-top: 4px;
-  font-size: 0.9rem;
-  color: #57606a;
+  margin-top: 6px;
+  color: #656d76;
 }
 
 .navbar-status {
@@ -33,9 +49,9 @@
 }
 
 .status {
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
 }
 
@@ -48,55 +64,72 @@
   background: #ddf4ff;
   color: #0550ae;
 }
-.metrics-grid {
-  margin-top: 24px;
 
+/* ---------- Metrics ---------- */
+
+.metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-
-.metric-card {
-  background: white;
-  border: 1px solid #d0d7de;
-  border-radius: 6px;
-  padding: 20px;
+  gap: 18px;
 }
 
 .metric-title {
-  color: #57606a;
+  color: #656d76;
   font-size: 0.9rem;
 }
 
 .metric-value {
-  margin-top: 8px;
-  font-size: 2rem;
-  font-weight: 600;
+  margin-top: 12px;
+  font-size: 2.4rem;
+  font-weight: 700;
 }
-.test-panel {
-  margin-top: 24px;
-  background: white;
-  border: 1px solid #d0d7de;
-  border-radius: 6px;
-  padding: 24px;
+
+/* ---------- Token Bucket ---------- */
+
+.token-card h2 {
+  margin-bottom: 8px;
 }
+
+.token-label {
+  color: #656d76;
+}
+
+.progress-bar {
+  margin: 18px 0;
+  width: 100%;
+  height: 14px;
+  background: #eaeef2;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #2da44e;
+  transition: width 0.35s ease;
+}
+
+.token-card h3 {
+  font-size: 1.8rem;
+}
+
+/* ---------- API Tester ---------- */
 
 .test-panel h2 {
   margin-bottom: 20px;
-  font-size: 1.4rem;
 }
 
 .button-group {
   display: flex;
   gap: 12px;
-  margin-bottom: 24px;
   flex-wrap: wrap;
+  margin-bottom: 22px;
 }
 
 .button-group button {
-  padding: 10px 18px;
   border: 1px solid #d0d7de;
   background: white;
+  padding: 10px 18px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.95rem;
@@ -104,7 +137,7 @@
 }
 
 .button-group button:hover:not(:disabled) {
-  background: #f6f8fa;
+  background: #f3f4f6;
 }
 
 .button-group button:disabled {
@@ -113,7 +146,7 @@
 }
 
 .test-result {
-  border-top: 1px solid #d0d7de;
+  border-top: 1px solid #e5e7eb;
   padding-top: 20px;
 }
 
@@ -123,59 +156,66 @@
 
 .result-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 16px;
 }
 
 .result-item {
+  border: 1px solid #d8dee4;
+  border-radius: 8px;
   padding: 16px;
-  border: 1px solid #d0d7de;
-  border-radius: 6px;
-  background: #fafbfc;
-
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }
 
 .result-item span {
-  color: #57606a;
+  display: block;
+  color: #656d76;
   font-size: 0.9rem;
 }
 
 .result-item strong {
-  font-size: 1.3rem;
+  display: block;
+  margin-top: 8px;
+  font-size: 1.5rem;
 }
-.recent-requests {
-  margin-top: 24px;
-  background: white;
-  border: 1px solid #d0d7de;
-  border-radius: 6px;
-  padding: 24px;
+
+/* ---------- Recent Requests ---------- */
+
+.recent-requests h2 {
+  margin-bottom: 18px;
 }
 
 .recent-requests table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 16px;
+}
+
+.recent-requests th {
+  text-align: left;
+  background: #f6f8fa;
+  color: #57606a;
+  font-weight: 600;
 }
 
 .recent-requests th,
 .recent-requests td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #e5e7eb;
+  padding: 14px 16px;
+  border-bottom: 1px solid #eaeef2;
 }
 
-.recent-requests th {
+.recent-requests tbody tr:hover {
   background: #f6f8fa;
 }
 
+/* ---------- Badges ---------- */
+
 .status-badge {
-  display: inline-block;
-  padding: 4px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  padding: 5px 12px;
   border-radius: 999px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
 }
 
@@ -188,25 +228,29 @@
   background: #ffebe9;
   color: #cf222e;
 }
-.token-card {
-  margin-top: 24px;
-  background: white;
-  border: 1px solid #d0d7de;
-  border-radius: 6px;
-  padding: 24px;
-}
 
-.progress-bar {
-  width: 100%;
-  height: 14px;
-  background: #e5e7eb;
-  border-radius: 999px;
-  overflow: hidden;
-  margin: 16px 0;
-}
+/* ---------- Responsive ---------- */
 
-.progress-fill {
-  height: 100%;
-  background: #238636;
-  transition: width 0.3s ease;
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .navbar-status {
+    flex-wrap: wrap;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+
+  .metric-value {
+    font-size: 2rem;
+  }
 }

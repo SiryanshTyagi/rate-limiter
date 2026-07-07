@@ -111,10 +111,10 @@ function TestPanel({ setRecentRequests, setRemainingTokens }) {
               <strong>{result.blocked}</strong>
             </div>
 
-            <div className="result-item">
+            {/* <div className="result-item">
               <span>Total Time</span>
               <strong>{result.totalTime} ms</strong>
-            </div>
+            </div> */}
 
             <div className="result-item">
               <span>Success Rate</span>
