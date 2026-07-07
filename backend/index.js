@@ -1,7 +1,12 @@
 import dotenv from "dotenv";
+import cors from "cors";
 
 dotenv.config();
-
+app.use(
+  cors({
+    origin: [process.env.FRONTEND_URL],
+  }),
+);
 import express from "express";
 import { rateLimiter } from "./middleware/rateLimiter.js";
 import redisClient from "./service/redis.js";
