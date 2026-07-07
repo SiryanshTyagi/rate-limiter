@@ -14,7 +14,6 @@ function Navbar({ health }) {
         <span className="status connected">
           Redis: {health ? health.redis : "Loading..."}
         </span>
-        <p>Uptime: {health ? `${health.uptime}s` : "Loading..."}</p>
       </div>
     </header>
   );
