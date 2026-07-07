@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import MetricCard from "./components/MetricCard";
 import TestPanel from "./components/TestPanel";
 import RecentRequests from "./components/RecentRequest";
+import TokenBucket from "./components/TokenBucket";
 import "./App.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -11,6 +12,7 @@ function App() {
   const [health, setHealth] = useState(null);
   const [metrics, setMetrics] = useState(null);
   const [recentRequests, setRecentRequests] = useState([]);
+  const [remainingTokens, setRemainingTokens] = useState(10);
 
   function formatUptime(seconds) {
     const hrs = Math.floor(seconds / 3600);
@@ -57,7 +59,9 @@ function App() {
         }
 
         const data = await response.json();
+
         setMetrics(data);
+        setRemainingTokens(data.remainingTokens);
       } catch (error) {
         console.error("Error fetching metrics:", error);
       }
@@ -104,7 +108,12 @@ function App() {
         />
       </div>
 
-      <TestPanel setRecentRequests={setRecentRequests} />
+      <TokenBucket tokens={remainingTokens} bucketSize={10} />
+
+      <TestPanel
+        setRecentRequests={setRecentRequests}
+        setRemainingTokens={setRemainingTokens}
+      />
       <RecentRequests requests={recentRequests} />
     </div>
   );

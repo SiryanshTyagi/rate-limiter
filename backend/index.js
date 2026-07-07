@@ -7,6 +7,7 @@ import express from "express";
 import { rateLimiter } from "./middleware/rateLimiter.js";
 import redisClient from "./service/redis.js";
 import { getMetrics, getUptime } from "./service/metrics.js";
+import { getRemainingTokens } from "./service/tokenBucketRedis.js";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -29,10 +30,14 @@ app.get("/health", (req, res) => {
   });
 });
 
-app.get("/metrics", (req, res) => {
+app.get("/metrics", async (req, res) => {
   const redisStatus = redisClient.isReady ? "CONNECTED" : "DISCONNECTED";
 
-  res.json(getMetrics(redisStatus));
+  const metrics = getMetrics(redisStatus);
+
+  metrics.remainingTokens = await getRemainingTokens(req.ip);
+
+  res.json(metrics);
 });
 
 app.use(rateLimiter); // Apply the rate limiter middleware to the app routes below

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-function TestPanel({ setRecentRequests }) {
+function TestPanel({ setRecentRequests, setRemainingTokens }) {
   const [loading, setLoading] = useState(false);
 
   const [result, setResult] = useState({
@@ -23,6 +23,10 @@ function TestPanel({ setRecentRequests }) {
 
       try {
         const response = await fetch(`${API_URL}/`);
+
+        const data = await response.json();
+
+        setRemainingTokens(data.remainingTokens);
 
         return {
           status: response.status,

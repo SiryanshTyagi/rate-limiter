@@ -140,6 +140,11 @@ export async function allowRequestLua(userId) {
   }
 }
 
+export async function getRemainingTokens(userId) {
+  const bucket = await getBucket(userId);
+  return Math.floor(bucket.tokens);
+}
+
 // Quick helper for manually checking that the Redis-backed limiter is working.
 export async function testRedisConnection(userId = "test-user") {
   const allowed = await allowRequestRedis(userId);
