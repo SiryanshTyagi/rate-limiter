@@ -38,7 +38,11 @@ app.get("/metrics", (req, res) => {
 app.use(rateLimiter); // Apply the rate limiter middleware to the app routes below
 
 app.get("/", (req, res) => {
-  res.send("rate limmiter app");
+  res.json({
+    success: true,
+    message: "Request Allowed",
+    remainingTokens: res.locals.remainingTokens,
+  });
 });
 
 async function startServer() {

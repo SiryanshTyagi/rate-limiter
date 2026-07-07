@@ -15,16 +15,21 @@ export async function rateLimiter(req, res, next) {
   const userId = req.ip; // Use the IP address as the user identifier
 
   // const allowed = allowRequest(userId);
-  const allowed = await allowRequestLua(userId);
+  const result = await allowRequestLua(userId);
 
-  if (!allowed) {
+  if (!result.allowed) {
     incrementBlocked();
+
     return res.status(429).json({
       success: false,
       message: "Too many requests, please try again later.",
+      remainingTokens: result.remainingTokens,
     });
   }
 
   incrementAllowed();
+
+  res.locals.remainingTokens = result.remainingTokens;
+
   next();
 }

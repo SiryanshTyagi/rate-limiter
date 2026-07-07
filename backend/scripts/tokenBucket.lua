@@ -51,7 +51,7 @@ if bucket.tokens < 1 then
         "lastRefill", bucket.lastRefill
     )
 
-    return 0
+    return {0, math.floor(bucket.tokens)}
 end
 
 -- Consume one token
@@ -65,4 +65,4 @@ redis.call(
     "lastRefill", bucket.lastRefill
 )
 
-return 1
+return {1, math.floor(bucket.tokens)}

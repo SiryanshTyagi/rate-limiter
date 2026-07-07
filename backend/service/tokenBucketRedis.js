@@ -115,8 +115,13 @@ async function executeLua(userId) {
 export async function allowRequestLua(userId) {
   try {
     await ensureLuaScriptLoaded();
-    const allowed = await executeLua(userId);
-    return allowed === 1;
+
+    const [allowed, remainingTokens] = await executeLua(userId);
+
+    return {
+      allowed: allowed === 1,
+      remainingTokens,
+    };
   } catch (error) {
     if (!error.message.startsWith("NOSCRIPT")) {
       throw error;
@@ -126,9 +131,12 @@ export async function allowRequestLua(userId) {
 
     await loadLuaScript();
 
-    const allowed = await executeLua(userId);
+    const [allowed, remainingTokens] = await executeLua(userId);
 
-    return allowed === 1;
+    return {
+      allowed: allowed === 1,
+      remainingTokens,
+    };
   }
 }
 

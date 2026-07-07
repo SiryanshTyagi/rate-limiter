@@ -1,4 +1,4 @@
-function Navbar() {
+function Navbar({ health }) {
   return (
     <header className="navbar">
       <div className="navbar-title">
@@ -7,8 +7,14 @@ function Navbar() {
       </div>
 
       <div className="navbar-status">
-        <span className="status up">Backend: UP</span>
-        <span className="status connected">Redis: CONNECTED</span>
+        <span className="status up">
+          Backend: {health ? health.status : "Loading..."}
+        </span>
+
+        <span className="status connected">
+          Redis: {health ? health.redis : "Loading..."}
+        </span>
+        <p>Uptime: {health ? `${health.uptime}s` : "Loading..."}</p>
       </div>
     </header>
   );

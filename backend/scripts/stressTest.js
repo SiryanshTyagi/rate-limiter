@@ -1,5 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 const TOTAL_REQUESTS = 100;
-const URL = "https://rate-limiter-nta2.onrender.com";
+const URL = process.env.BACKEND_URL;
 
 async function sendRequest() {
   try {
