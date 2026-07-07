@@ -1,31 +1,44 @@
-/* ---------- Layout ---------- */
+/* =========================
+   GLOBAL
+========================= */
 
-.app {
-  max-width: 1250px;
-  margin: 32px auto;
-  padding: 0 20px 40px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background: #f6f8fa;
-  color: #24292f;
+  font-family: Inter, system-ui, sans-serif;
+  background: #f5f7fb;
+  color: #1f2937;
 }
 
-/* ---------- Common Card ---------- */
+.app {
+  width: min(1200px, 95%);
+  margin: 28px auto;
+}
+
+/* =========================
+   COMMON CARD
+========================= */
 
 .navbar,
 .metric-card,
 .token-card,
 .test-panel,
 .recent-requests {
-  background: #fff;
-  border: 1px solid #d8dee4;
-  border-radius: 8px;
-  padding: 24px;
-  margin-bottom: 24px;
+  background: white;
+  border: 1px solid #e4e7ec;
+  border-radius: 12px;
+  padding: 22px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* ---------- Navbar ---------- */
+/* =========================
+   NAVBAR
+========================= */
 
 .navbar {
   display: flex;
@@ -36,45 +49,64 @@ body {
 .navbar-title h1 {
   font-size: 2rem;
   font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .navbar-title p {
   margin-top: 6px;
-  color: #656d76;
+  color: #6b7280;
+  font-size: 0.95rem;
 }
 
 .navbar-status {
   display: flex;
-  gap: 12px;
+  gap: 10px;
+  align-items: center;
 }
 
 .status {
   padding: 8px 14px;
   border-radius: 999px;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: 600;
 }
 
 .up {
-  background: #dafbe1;
-  color: #116329;
+  background: #dcfce7;
+  color: #166534;
 }
 
 .connected {
-  background: #ddf4ff;
-  color: #0550ae;
+  background: #dbeafe;
+  color: #1d4ed8;
 }
 
-/* ---------- Metrics ---------- */
+.uptime {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* =========================
+   METRICS
+========================= */
 
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 18px;
 }
 
+.metric-card {
+  min-height: 130px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .metric-title {
-  color: #656d76;
+  color: #6b7280;
   font-size: 0.9rem;
 }
 
@@ -82,67 +114,77 @@ body {
   margin-top: 12px;
   font-size: 2.4rem;
   font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
-/* ---------- Token Bucket ---------- */
+/* =========================
+   TOKEN CARD
+========================= */
 
 .token-card h2 {
-  margin-bottom: 8px;
+  margin-bottom: 14px;
 }
 
 .token-label {
-  color: #656d76;
+  color: #6b7280;
+  margin-bottom: 12px;
 }
 
 .progress-bar {
-  margin: 18px 0;
   width: 100%;
-  height: 14px;
-  background: #eaeef2;
+  height: 12px;
+  background: #e5e7eb;
   border-radius: 999px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: #2da44e;
+  background: linear-gradient(90deg, #16a34a, #22c55e);
   transition: width 0.35s ease;
 }
 
 .token-card h3 {
+  margin-top: 14px;
   font-size: 1.8rem;
+  font-weight: 700;
 }
 
-/* ---------- API Tester ---------- */
+/* =========================
+   TEST PANEL
+========================= */
 
 .test-panel h2 {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .button-group {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 
 .button-group button {
-  border: 1px solid #d0d7de;
-  background: white;
   padding: 10px 18px;
-  border-radius: 6px;
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+  background: white;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  font-weight: 600;
   transition: 0.2s;
 }
 
 .button-group button:hover:not(:disabled) {
-  background: #f3f4f6;
+  background: #111827;
+  color: white;
+  border-color: #111827;
 }
 
 .button-group button:disabled {
-  opacity: 0.6;
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .test-result {
@@ -156,20 +198,20 @@ body {
 
 .result-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
 }
 
 .result-item {
-  border: 1px solid #d8dee4;
-  border-radius: 8px;
+  border: 1px solid #e4e7ec;
+  border-radius: 10px;
   padding: 16px;
 }
 
 .result-item span {
   display: block;
-  color: #656d76;
-  font-size: 0.9rem;
+  color: #6b7280;
+  font-size: 0.82rem;
 }
 
 .result-item strong {
@@ -178,7 +220,9 @@ body {
   font-size: 1.5rem;
 }
 
-/* ---------- Recent Requests ---------- */
+/* =========================
+   TABLE
+========================= */
 
 .recent-requests h2 {
   margin-bottom: 18px;
@@ -189,57 +233,80 @@ body {
   border-collapse: collapse;
 }
 
+.recent-requests thead {
+  background: #f8fafc;
+}
+
 .recent-requests th {
   text-align: left;
-  background: #f6f8fa;
-  color: #57606a;
+  color: #475467;
+  font-size: 0.9rem;
   font-weight: 600;
 }
 
 .recent-requests th,
 .recent-requests td {
-  padding: 14px 16px;
-  border-bottom: 1px solid #eaeef2;
+  padding: 14px 18px;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.recent-requests tbody tr {
+  transition: 0.15s;
 }
 
 .recent-requests tbody tr:hover {
-  background: #f6f8fa;
+  background: #f8fafc;
 }
 
-/* ---------- Badges ---------- */
+/* =========================
+   STATUS BADGES
+========================= */
 
 .status-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 80px;
+  min-width: 90px;
   padding: 5px 12px;
   border-radius: 999px;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
 }
 
 .allowed {
-  background: #dafbe1;
-  color: #116329;
+  background: #dcfce7;
+  color: #166534;
 }
 
 .blocked {
-  background: #ffebe9;
-  color: #cf222e;
+  background: #fee2e2;
+  color: #b91c1c;
 }
 
-/* ---------- Responsive ---------- */
+/* =========================
+   RESPONSIVE
+========================= */
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .result-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
-    gap: 20px;
+    gap: 18px;
   }
 
-  .navbar-status {
-    flex-wrap: wrap;
+  .metrics-grid,
+  .result-grid {
+    grid-template-columns: 1fr;
   }
 
   .button-group {
@@ -248,9 +315,5 @@ body {
 
   .button-group button {
     width: 100%;
-  }
-
-  .metric-value {
-    font-size: 2rem;
   }
 }
