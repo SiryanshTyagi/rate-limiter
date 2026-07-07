@@ -2,11 +2,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 dotenv.config();
-app.use(
-  cors({
-    origin: [process.env.FRONTEND_URL],
-  }),
-);
+
 import express from "express";
 import { rateLimiter } from "./middleware/rateLimiter.js";
 import redisClient from "./service/redis.js";
@@ -15,6 +11,11 @@ import { getMetrics, getUptime } from "./service/metrics.js";
 const app = express();
 app.set("trust proxy", true);
 
+app.use(
+  cors({
+    origin: [process.env.FRONTEND_URL],
+  }),
+);
 app.use(express.json());
 
 app.get("/health", (req, res) => {
