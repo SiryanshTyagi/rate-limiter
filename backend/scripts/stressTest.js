@@ -1,5 +1,5 @@
 const TOTAL_REQUESTS = 100;
-const URL = "http://localhost:3000/";
+const URL = "https://rate-limiter-nta2.onrender.com";
 
 async function sendRequest() {
   try {
@@ -35,11 +35,13 @@ async function runStressTest() {
   const rateLimited = results.filter((r) => r === 429).length;
   const errors = results.filter((r) => r === "ERROR").length;
 
+  const others = results.filter((r) => r !== 200 && r !== 429 && r !== "ERROR");
+
   console.log("===== Stress Test Result =====");
   console.log("Total Requests :", TOTAL_REQUESTS);
   console.log("Success        :", success);
   console.log("Rate Limited   :", rateLimited);
-  console.log("Errors         :", errors);
+  console.log("Other Status Codes:", others);
   console.log("Time Taken     :", `${duration} ms`);
 }
 
