@@ -9,6 +9,7 @@ import redisClient from "./service/redis.js";
 import { getMetrics, getUptime } from "./service/metrics.js";
 
 const app = express();
+const port = process.env.PORT || 3000;
 app.set("trust proxy", true);
 
 app.use(
@@ -40,7 +41,18 @@ app.get("/", (req, res) => {
   res.send("rate limmiter app");
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`server is running on port ${port}`);
-});
+async function startServer() {
+  try {
+    await redisClient.connect();
+    console.log("Redis Connected");
+
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+  } catch (error) {
+    console.error("Failed to connect to Redis:", error);
+    process.exit(1);
+  }
+}
+
+startServer();
